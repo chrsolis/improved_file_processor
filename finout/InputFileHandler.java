@@ -10,9 +10,16 @@ public class InputFileHandler {
 	File inputFile;
 	BufferedReader inFileReader;
 	
+	public InputFileHandler(File in) throws FileNotFoundException {
+		inputFile = in;
+		if (!inputFile.exists()) throw new FileNotFoundException();
+		
+		inFileReader = new BufferedReader(new FileReader(inputFile));
+	}
+	
 	public InputFileHandler(String fPath) throws FileNotFoundException {
 		inputFile = new File(fPath);
-		if (!(inputFile.exists())) throw new FileNotFoundException();
+		if (!inputFile.exists()) throw new FileNotFoundException();
 		
 		inFileReader = new BufferedReader(new FileReader(inputFile));
 	}
@@ -34,6 +41,6 @@ public class InputFileHandler {
 		} catch(IOException ioExc) {
 			System.out.println("\nIOException -- Did the file change directory or permissions?");
 			return null;
-		}	
+		} 
 	}
 }
